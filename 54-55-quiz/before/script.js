@@ -40,6 +40,7 @@ form.addEventListener("submit", (e) => {
 				parent.classList.add("incorrect");
 				parent.classList.remove("correct");
 			}
+			//change
 		}
 	});
 });
