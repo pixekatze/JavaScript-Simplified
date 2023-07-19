@@ -1,0 +1,241 @@
+/* Box sizing rules */
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+	margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+	list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+	scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+	min-height: 100vh;
+	text-rendering: optimizeSpeed;
+	line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+	text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+	max-width: 100%;
+	display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+input {
+	appearance: none;
+}
+
+input[type="search"]:not(:focus, :active)::-webkit-search-cancel-button {
+	display: none;
+}
+form > * {
+	margin: 1rem 0 0 2rem;
+}
+
+input[type="checkbox"] {
+	position: relative;
+	width: 1em;
+	height: 1em;
+	border: 1px solid gray;
+	/* Adjusts the position of the checkboxes on the text baseline */
+	vertical-align: -2px;
+	/* Set here so that Windows' High-Contrast Mode can override */
+	color: green;
+}
+
+/* input[type="checkbox"]::before {
+	content: "✔";
+	position: absolute;
+	font-size: 1.2em;
+	right: -1px;
+	top: -0.3em;
+	visibility: hidden;
+} */
+
+input[type="checkbox"]:checked::before {
+	/* Use `visibility` instead of `display` to avoid recalculating layout */
+	visibility: visible;
+}
+
+input[type="checkbox"]:disabled {
+	border-color: black;
+	background: #ddd;
+	color: gray;
+}
+
+input[type="radio"] {
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	border: 2px solid gray;
+	/* Adjusts the position of the checkboxes on the text baseline */
+	vertical-align: -2px;
+	outline: none;
+}
+
+input[type="radio"]::before {
+	display: block;
+	content: " ";
+	width: 10px;
+	height: 10px;
+	border-radius: 6px;
+	background-color: red;
+	font-size: 1.2em;
+	transform: translate(3px, 3px) scale(0);
+	transform-origin: center;
+	transition: all 0.3s ease-in;
+}
+
+input[type="radio"]:checked::before {
+	transform: translate(3px, 3px) scale(1);
+	transition: all 0.3s cubic-bezier(0.25, 0.25, 0.56, 2);
+}
+
+/* Flexbox fu to make the control and label line up */
+
+.toggle {
+	width: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	position: relative;
+}
+
+/*
+         Size the label, and make the on and off parts sit on top
+         of one another using positioning
+      */
+
+.toggle label {
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	position: relative;
+}
+
+.toggle label span {
+	position: absolute;
+}
+
+/*
+         remove the default styling of the checkbox using appearance
+         and create the outer toggle area
+      */
+
+.toggle input[type="checkbox"] {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 3.5rem;
+	height: 1.6rem;
+	border-radius: 1rem;
+	border: 2px solid black;
+	background: #eee;
+	transition: all 0.4s;
+}
+
+/*
+         style the ::before content to look like
+         the inner toggle switch - the bit that moves
+      */
+
+.toggle input[type="checkbox"]::before {
+	width: 1.5rem;
+	height: 1.5rem;
+	border-radius: 50%;
+	background-color: black;
+	content: "";
+	position: absolute;
+	top: -1px;
+	left: 0%;
+	transition: all 0.4s;
+}
+
+/*
+         change the outer background color and move the inner toggle switch
+         when the checkbox is checked; use transitions for smooth animation
+      */
+
+.toggle input[type="checkbox"]:checked {
+	background-color: #ffaa00;
+	transition: all 0.4s;
+}
+
+.toggle input[type="checkbox"]:checked::before {
+	left: calc(100% - 1.5rem);
+	transition: all 0.4s;
+}
+
+/*
+         cause the On and Off parts of the label to be visible when the checkbox is
+         checked and unchecked, respectively
+      */
+
+.toggle input[type="checkbox"] ~ label .on,
+.toggle input[type="checkbox"]:checked ~ label .off {
+	opacity: 0;
+}
+
+.toggle input[type="checkbox"] ~ label .off,
+.toggle input[type="checkbox"]:checked ~ label .on {
+	opacity: 1;
+}
+
+/*
+         make the focus outline a bit more subtle on Chrome, rather than the
+         default heavy blue outline
+      */
+
+.toggle input:focus {
+	outline: 1px dotted black;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+	html:focus-within {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
