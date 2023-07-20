@@ -4,7 +4,7 @@ const list = document.querySelector("#list");
 const template = document.querySelector("#list-item-template");
 const LOCAL_STORAGE_PREFIX = "ADVANCED_TODO_LIST";
 const TODOS_STORAGE_KEY = `${LOCAL_STORAGE_PREFIX}-todos`;
-let todos = loadTodos();
+let todos = loadCards();
 todos.forEach((todo) => renderTodo(todo));
 
 list.addEventListener("change", (e) => {
@@ -15,7 +15,7 @@ list.addEventListener("change", (e) => {
 	const todo = todos.find((t) => t.id === todoId);
 	todo.complete = e.target.checked;
 
-	saveTodos();
+	saveCards();
 });
 
 list.addEventListener("click", (e) => {
@@ -26,7 +26,7 @@ list.addEventListener("click", (e) => {
 	parent.remove();
 	todos = todos.filter((todo) => todo.id !== todoId);
 
-	saveTodos();
+	saveCards();
 });
 
 // Add Todos
@@ -42,7 +42,7 @@ form.addEventListener("submit", (e) => {
 	};
 	todos.push(newTodo);
 	renderTodo(newTodo);
-	saveTodos();
+	saveCards();
 	todoInput.value = "";
 });
 
@@ -58,12 +58,12 @@ function renderTodo(todo) {
 }
 
 // Save Todos
-function saveTodos() {
+function saveCards() {
 	localStorage.setItem(TODOS_STORAGE_KEY, JSON.stringify(todos));
 }
 
 // Load Todos
-function loadTodos() {
+function loadCards() {
 	const todosString = localStorage.getItem(TODOS_STORAGE_KEY);
 	return JSON.parse(todosString) || [];
 }
