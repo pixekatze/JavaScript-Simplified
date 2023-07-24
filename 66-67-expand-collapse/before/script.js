@@ -19,6 +19,9 @@ document.addEventListener("click", (e) => {
 
 		cards[thisCardNumber] = isExpanded;
 
+		// console.log(cards);
+
+		// cards.push(cardStatus);
 		setCards(cards);
 		saveCards();
 	}
